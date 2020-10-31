@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tom.springboot.mapper.OrderMapper">
+    <insert id="insertOrder" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO taco_order(id, deliveryName, deliveryStreet, deliveryCity, deliveryState, deliveryZip, ccNumber,
+                               ccExpiration, ccCVV, placedAt)
+        VALUES (#{id}, #{name}, #{street}, #{city}, #{state}, #{zip}, #{ccNumber}, #{ccExpiration}, #{ccCVV},
+                #{placedAt});
+    </insert>
+    <insert id="insertTacoOrder">
+        INSERT INTO taco_order_tacos(taco, tacoOrder)
+        VALUES (#{taco.id}, #{order.id});
+    </insert>
+</mapper>

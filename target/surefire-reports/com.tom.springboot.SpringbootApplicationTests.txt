@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: com.tom.springboot.SpringbootApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 10.221 s <<< FAILURE! - in com.tom.springboot.SpringbootApplicationTests
+contextLoadsTest  Time elapsed: 0.572 s  <<< ERROR!
+org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.executor.result.ResultMapException: Error attempting to get column 'type' from result set.  Cause: java.lang.NumberFormatException: For input string: "PROTEIN"
+	at com.tom.springboot.SpringbootApplicationTests.contextLoadsTest(SpringbootApplicationTests.java:19)
+Caused by: org.apache.ibatis.executor.result.ResultMapException: Error attempting to get column 'type' from result set.  Cause: java.lang.NumberFormatException: For input string: "PROTEIN"
+	at com.tom.springboot.SpringbootApplicationTests.contextLoadsTest(SpringbootApplicationTests.java:19)
+Caused by: java.lang.NumberFormatException: For input string: "PROTEIN"
+	at com.tom.springboot.SpringbootApplicationTests.contextLoadsTest(SpringbootApplicationTests.java:19)
+

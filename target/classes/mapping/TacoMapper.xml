@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tom.springboot.mapper.TacoMapper">
+    <insert id="insertTaco" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO taco(name, createdAt)
+        VALUES (#{name}, #{createdAt});
+    </insert>
+    <insert id="insertIngredientList">
+        <selectKey keyProperty="id" order="BEFORE" resultType="_long" >
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        INSERT INTO taco_ingredients(taco,ingredient)
+        VALUES
+        <foreach collection="ingredients" item="items" separator=",">
+            (${id},#{items})
+        </foreach>
+    </insert>
+    <select id="getTacoList" resultMap="tacoList">
+        SELECT *
+        FROM taco
+        where id between #{begin} and #{end};
+    </select>
+    <resultMap id="tacoList" type="com.tom.springboot.pojo.Taco">
+        <id property="id" column="id"/>
+        <result property="createdAt" column="createdAt"/>
+        <result property="name" column="name"/>
+        <collection property="ingredients" select="selectIngredient" ofType="com.tom.springboot.pojo.Ingredient" column="id">
+        </collection>
+    </resultMap>
+    <select id="selectIngredient" resultMap="ingredientMap">
+        SELECT * FROM ingredient
+    </select>
+    <resultMap id="ingredientMap" type="com.tom.springboot.pojo.Ingredient">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="type" property="type"/>
+    </resultMap>
+</mapper>
